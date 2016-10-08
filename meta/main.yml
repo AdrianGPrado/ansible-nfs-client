@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Adrian G Prado
+  description: Install and setup nfs-client
+
+  license: MIT
+
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: EL
+    versions:
+    - all
+    - 5
+    - 6
+    - 7
+  - name: Ubuntu
+    versions:
+    - wily
+    - xenial
+
+  galaxy_tags:
+    - system
+
+dependencies: []
