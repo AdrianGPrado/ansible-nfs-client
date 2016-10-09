@@ -1,0 +1,10 @@
+---
+
+nfs_client_pkgs:
+  - nfs-utils
+
+nfs_client_services:
+  - rpcbind
+  - nfs-server
+  - nfs-lock
+  - nfs-idmap

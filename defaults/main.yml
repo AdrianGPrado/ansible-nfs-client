@@ -1,0 +1,14 @@
+---
+
+# NFS server Fully Qualified Domain Name (IP is also valid)
+nfs_server: 172.32.120.10
+
+# dictionary with client/server paths pairs
+nfs_mount: []
+
+# nfs_mount: []
+#   # Git repository data. This will account for a large portion of your data
+#   - client: /var/opt/gitlab/git-data
+#     server: /opt/gitlab/git-data
+
+nfs_mount_ops: "nfs rw,sync,hard,intr,nobootwait 0 2"
