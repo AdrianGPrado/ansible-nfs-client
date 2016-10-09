@@ -3,6 +3,10 @@
 # NFS server Fully Qualified Domain Name (IP is also valid)
 nfs_server: 172.32.120.10
 
+# Folder/s user and group
+nfs_client_owner: root
+nfs_client_group: root
+
 # dictionary with client/server paths pairs
 nfs_mount: []
 
