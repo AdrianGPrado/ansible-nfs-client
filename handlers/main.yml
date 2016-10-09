@@ -1,0 +1,31 @@
+---
+# handlers file for nfs-client
+- name: restart nfs-server
+  service:
+    name=nfs-server
+    state=restarted
+    enabled=yes
+
+- name: restart nfs-lock
+  service:
+    name=nfs-lock
+    state=restarted
+    enabled=yes
+
+- name: restart nfs-idmap
+  service:
+    name=nfs-idmap
+    state=restarted
+    enabled=yes
+
+- name: restart rpcbind
+  service:
+    name=rpcbind
+    state=restarted
+    enabled=yes
+
+- name: restart firewall
+  service:
+    name={{ firewall_service }}
+    state=restarted
+    enabled=yes
