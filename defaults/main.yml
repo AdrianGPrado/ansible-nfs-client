@@ -7,12 +7,12 @@ nfs_server: 172.32.120.10
 nfs_client_owner: root
 nfs_client_group: root
 
-# dictionary with client/server paths pairs
-nfs_mount: []
-
-# nfs_mount: []
+# dictionary with client/server paths pairs to be used in /etc/fstab
+#
+# nfs_exports: []
 #   # Git repository data. This will account for a large portion of your data
 #   - client: /var/opt/gitlab/git-data
 #     server: /opt/gitlab/git-data
+nfs_exports: []
 
-nfs_mount_ops: "nfs rw,sync,hard,intr,nobootwait 0 2"
+nfs_mount_client_ops: "nfs rw,sync,hard,intr,nobootwait 0 2"
