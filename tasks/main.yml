@@ -1,0 +1,48 @@
+---
+# This task is used to mount a filesystem via NFS.
+#
+# Variables you need to define:
+# nfs_server:     the nfs server to mount from FQDN or IP
+# nfs_exports:      dictionary with client/server paths pairs
+# nfs_mount_client_ops:  options to use when mounting the filesystem. If not
+#                 defined, `rw,sync` will be used.
+#
+# Please note that the task will check if the {{ nfs_exports }} directory
+# exists and create it otherwise.
+#
+
+# 0 include OS variables
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install nfs client
+  package:
+    name="{{ item }}"
+    state=latest
+  with_items: "{{ nfs_client_pkgs }}"
+
+- name: Create directories
+  file:
+    path="{{ item.client }}"
+    state=directory
+    mode=755
+    owner="{{ nfs_client_owner }}"
+    group="{{ nfs_client_group }}"
+  with_items: "{{ nfs_exports }}"
+
+- name: Write nfs folders in /etc/fstabs
+  lineinfile:
+    dest=/etc/fstab
+    regexp='^{{ nfs_server }}:{{ item.server }} {{ item.client }} {{ nfs_mount_client_ops }}$'
+    line='{{ nfs_server }}:{{ item.server }} {{ item.client }} {{ nfs_mount_client_ops }}'
+  with_items: "{{ nfs_exports }}"
+
+- name: Restart and enable services
+  service:
+    name={{ item }}
+    state=restarted
+    enabled=yes
+  with_items: "{{ nfs_client_services }}"
+
+- name: Remount /etc/fstab on clients
+  shell: "mount -a"
